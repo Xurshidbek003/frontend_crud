@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session
 from db import database
 from models.students import Students
 from functions.students import add_student, update_student, delete_student
@@ -11,7 +11,7 @@ student_router = APIRouter()
 
 @student_router.get("/get_students")
 def studentlarni_korish(db: Session = Depends(database)):
-    return db.query(Students).options(joinedload(Students.course)).all()
+    return db.query(Students).all()
 
 
 @student_router.post("/add_student")
