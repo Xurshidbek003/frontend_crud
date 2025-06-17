@@ -3,8 +3,17 @@ from db import Base, engine
 from models.students import Students
 from routers.students import student_router
 from sqladmin import Admin, ModelView
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Iteach education", docs_url='/')
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 Base.metadata.create_all(bind=engine)
 
